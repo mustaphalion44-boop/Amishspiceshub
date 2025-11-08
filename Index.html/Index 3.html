@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghanaian Spices | Amish Enterprise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #e74c3c;
+            --secondary: #2c3e50;
+            --accent: #f39c12;
+            --light: #f9f5eb;
+            --dark: #333;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: #e67e22;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .whatsapp-btn {
+            background: #25D366;
+            margin-left: 10px;
+        }
+        
+        .whatsapp-btn:hover {
+            background: #128C7E;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 10px auto;
+        }
+        
+        .spices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+        
+        .spice-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .spice-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .spice-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .spice-info {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .spice-name {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+        
+        .spice-description {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            flex-grow: 1;
+        }
+        
+        .spice-price {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .spice-uses {
+            font-size: 0.9rem;
+            color: #555;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+        
+        .order-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: auto;
+        }
+        
+        .order-btn:hover {
+            background: var(--primary);
+        }
+        
+        .about {
+            background: white;
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .contact {
+            padding: 4rem 0;
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .contact-item i {
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .whatsapp-numbers {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+        
+        .whatsapp-numbers h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .spices-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-pepper-hot"></i>
+                    <h1>Amish <span>Enterprise</span></h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#spices">Our Spices</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Authentic Ghanaian Spices</h2>
+            <p>Discover the rich flavors of Ghana with our premium selection of traditional spices, carefully sourced and packaged for your culinary adventures.</p>
+            <a href="#spices" class="btn">Explore Our Spices</a>
+            <a href="https://wa.me/233507392725" class="btn whatsapp-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> Order on WhatsApp
+            </a>
+        </div>
+    </section>
+    
+    <main class="container">
+        <section id="spices">
+            <h2 class="section-title">Our Premium Spice Collection</h2>
+            <div class="spices-grid">
+                <!-- Spice 1 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Grains of Paradise" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">Grains of Paradise</h3>
+                        <p class="spice-description">Aromatic seeds with peppery, citrusy flavor, essential in many Ghanaian dishes.</p>
+                        <p class="spice-price">₵15 - ₵25 per 100g</p>
+                        <p class="spice-uses">Commonly used in soups, stews, and marinades.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Spice 2 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="African Nutmeg" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">African Nutmeg</h3>
+                        <p class="spice-description">Warm, nutty spice with a distinctive aroma, used in both sweet and savory dishes.</p>
+                        <p class="spice-price">₵20 - ₵35 per 100g</p>
+                        <p class="spice-uses">Ideal for soups, rice dishes, and baked goods.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Spice 3 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1592317997853-7d402c5d97b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Grains of Selim" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">Grains of Selim</h3>
+                        <p class="spice-description">Smoky, peppery pods that add depth to soups and stews.</p>
+                        <p class="spice-price">₵12 - ₵20 per 100g</p>
+                        <p class="spice-uses">Essential for traditional soups like light soup and groundnut soup.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Spice 4 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1592317997853-7d402c5d97b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Soro Wisa" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">Soro Wisa</h3>
+                        <p class="spice-description">West African black pepper with intense heat and complex flavor.</p>
+                        <p class="spice-price">₵18 - ₵30 per 100g</p>
+                        <p class="spice-uses">Used in pepper sauces, stews, and as a table condiment.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Spice 5 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Dawadawa" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">Dawadawa</h3>
+                        <p class="spice-description">Fermented locust beans with a pungent aroma, used as a flavor enhancer.</p>
+                        <p class="spice-price">₵8 - ₵15 per 100g</p>
+                        <p class="spice-uses">Essential in soups, stews, and sauces for umami flavor.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Spice 6 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cloves" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">Cloves</h3>
+                        <p class="spice-description">Intensely aromatic flower buds with a warm, sweet flavor.</p>
+                        <p class="spice-price">₵25 - ₵40 per 100g</p>
+                        <p class="spice-uses">Used in soups, rice dishes, and traditional beverages.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Spice 7 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1592317997853-7d402c5d97b0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Cinnamon" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">Cinnamon</h3>
+                        <p class="spice-description">Sweet and woody spice from the bark of cinnamon trees.</p>
+                        <p class="spice-price">₵20 - ₵35 per 100g</p>
+                        <p class="spice-uses">Adds warmth to both sweet and savory Ghanaian dishes.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+                
+                <!-- Spice 8 -->
+                <div class="spice-card">
+                    <img src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Aniseed" class="spice-image">
+                    <div class="spice-info">
+                        <h3 class="spice-name">Aniseed</h3>
+                        <p class="spice-description">Licorice-flavored seeds used in both cooking and traditional medicine.</p>
+                        <p class="spice-price">₵15 - ₵25 per 100g</p>
+                        <p class="spice-uses">Common in baked goods, soups, and herbal remedies.</p>
+                        <button class="order-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="about" id="about">
+            <div class="container">
+                <h2 class="section-title">About Amish Enterprise</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Amish Enterprise has been a trusted name in authentic Ghanaian spices for over 15 years. Founded with a passion for preserving and sharing the rich culinary heritage of Ghana, we source our spices directly from local farmers across the country.</p>
+                        <p>Our commitment to quality ensures that every spice we offer is carefully selected, processed, and packaged to maintain its authentic flavor and aroma. We take pride in supporting local communities while bringing the true taste of Ghana to your kitchen.</p>
+                        <p>Whether you're a professional chef or a home cook, our spices will elevate your dishes with the authentic flavors that make Ghanaian cuisine so special.</p>
+                        <a href="#contact" class="btn" style="margin-top: 1.5rem;">Contact Us</a>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Spice market">
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2 class="section-title" style="color: white;">Contact Us</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Get In Touch</h3>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <p>123 Spice Street, Accra, Ghana</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <p>+233 123 456 789</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <p>info@amishenterprise.com</p>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <p>Mon - Sat: 8:00 AM - 6:00 PM</p>
+                        </div>
+                        
+                        <div class="whatsapp-numbers">
+                            <h4>Order via WhatsApp</h4>
+                            <div class="contact-item">
+                                <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                                <p>+233 50 739 2725</p>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-whatsapp" style="color: #25D366;"></i>
+                                <p>+233 55 551 6609</p>
+                            </div>
+                            <a href="https://wa.me/233507392725" class="btn whatsapp-btn" style="margin-top: 10px; display: inline-block;">
+                                <i class="fab fa-whatsapp"></i> Message Us
+                            </a>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <h3>Send Us a Message</h3>
+                        <form>
+                            <input type="text" placeholder="Your Name" required style="width: 100%; padding: 10px; margin-bottom: 1rem; border-radius: 5px; border: none;">
+                            <input type="email" placeholder="Your Email" required style="width: 100%; padding: 10px; margin-bottom: 1rem; border-radius: 5px; border: none;">
+                            <textarea placeholder="Your Message" rows="5" style="width: 100%; padding: 10px; margin-bottom: 1rem; border-radius: 5px; border: none;"></textarea>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="logo">
+                <i class="fas fa-pepper-hot"></i>
+                <h2>Amish <span>Enterprise</span></h2>
+            </div>
+            <p>Bringing authentic Ghanaian flavors to your kitchen since 2008</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/233507392725"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <p>&copy; 2023 Amish Enterprise. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Simple script for smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add to cart functionality
+        document.querySelectorAll('.order-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const spiceName = this.parentElement.querySelector('.spice-name').textContent;
+                alert(`Added ${spiceName} to your cart!`);
+            });
+        });
+    </script>
+</body>
+</html>
